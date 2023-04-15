@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シフト提出状況</title>
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+<body>
+    <header class="header01">
+        <h1 class="header01-logo"><a href="{{ url_for('index') }}">シフト管理アプリ</a></h1>
+
+        <nav class="header01-nav">
+            <ul class="header01-list">
+                <li class="header01-item"><a href="{{ url_for('form') }}">シフトを提出</a></li>
+                <li class="header01-item"><a href="{{ url_for('publish') }}">シフトを確認</a></li>
+                <li class="header01-item header01-item--contact"><a href="{{ url_for('login_admin') }}">管理者画面</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>シフト提出状況</h1>
+    <a href="{{ url_for('check_delete') }}">先週のシフト提出状況を削除して新しいシフトを集める</a>
+    <form action="{{ url_for('check_shift') }}" method="POST">
+        <p>入れない(削る)場合は'x'とか'X'とか'0'とか無入力にしてください</p>
+        <table border="1">
+            <tr>
+                <th>なまえ</th>
+                <th>月曜日</th>
+                <th>火曜日</th>
+                <th>水曜日</th>
+                <th>木曜日</th>
+                <th>金曜日</th>
+                <th>土曜日</th>
+                <th>日曜日</th>
+            </tr>
+            {% for i in range(shift|length) %}
+                <tr>
+                    <td>
+                        {{ shift[i].username }}
+                        <input type="text" name="user{{ i }}" id="" value="{{ shift[i].username }}" hidden>
+                    </td>
+                    <td>
+                        {{ shift[i].mon }} 
+                        {% if shift[i].mon != 'x' and shift[i].mon != 'X' and shift.mon != '0' %}
+                        <input type="text" tabindex="1" size="5" name="mon{{ i }}">
+                        {% else %}
+                        <input type="text" tabindex="1" size="5" name="mon{{ i }}" value="not_in" hidden>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ shift[i].tue }}
+                        {% if shift[i].tue != 'x' and shift[i].tue != 'X' and shift.tue != '0' %}
+                        <input type="text" tabindex="2" size="5" name="tue{{ i }}">
+                        {% else %}
+                        <input type="text" tabindex="2" size="5" name="tue{{ i }}" value="not_in" hidden>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ shift[i].wed }}
+                        {% if shift[i].wed != 'x' and shift[i].wed != 'X' and shift.wed != '0' %}
+                        <input type="text" tabindex="3" size="5" name="wed{{ i }}">
+                        {% else %}
+                        <input type="text" tabindex="3" size="5" name="wed{{ i }}" value="not_in" hidden>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ shift[i].thu }}
+                        {% if shift[i].thu != 'x' and shift[i].thu != 'X' and shift.thu != '0' %}
+                        <input type="text" tabindex="4" size="5" name="thu{{ i }}">
+                        {% else %}
+                        <input type="text" tabindex="4" size="5" name="thu{{ i }}" value="not_in" hidden>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ shift[i].fri }}
+                        {% if shift[i].fri != 'x' and shift[i].fri != 'X' and shift.fri != '0' %}
+                        <input type="text" tabindex="5" size="5" name="fri{{ i }}">
+                        {% else %}
+                        <input type="text" tabindex="5" size="5" name="fri{{ i }}" value="not_in" hidden>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ shift[i].sat }}
+                        {% if shift[i].sat != 'x' and shift[i].sat != 'X' and shift.sat != '0' %}
+                        <input type="text" tabindex="6" size="5" name="sat{{ i }}">
+                        {% else %}
+                        <input type="text" tabindex="6" size="5" name="sat{{ i }}" value="not_in" hidden>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ shift[i].sun }}
+                        {% if shift[i].sun != 'x' and shift[i].sun != 'X' and shift.sun != '0' %}
+                        <input type="text" tabindex="7" size="5" name="sun{{ i }}">
+                        {% else %}
+                        <input type="text" tabindex="7" size="5" name="sun{{ i }}" value="not_in" hidden>
+                        {% endif %}
+                    </td>
+                </tr> 
+            {%endfor %}
+        </table>
+        <input type="submit" value="シフトを確定してポジションを決める">
+        <b>※このボタンを押した瞬間先週のシフトは削除され、組み替えできなくなります。</b>
+    </form>
+</body>
+</html>

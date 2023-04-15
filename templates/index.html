@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シフト管理アプリ</title>
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+<body>
+    <header class="header01">
+        <h1 class="header01-logo"><a href="{{ url_for('index') }}">シフト管理アプリ</a></h1>
+
+        <nav class="header01-nav">
+            <ul class="header01-list">
+                <li class="header01-item"><a href="{{ url_for('form') }}">シフトを提出</a></li>
+                <li class="header01-item"><a href="{{ url_for('publish') }}">シフトを確認</a></li>
+                <li class="header01-item header01-item--contact"><a href="{{ url_for('login_admin') }}">管理者画面</a></li>
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>

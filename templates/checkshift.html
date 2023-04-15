@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シフト確認ページ</title>
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+<body>
+    <header class="header01">
+        <h1 class="header01-logo"><a href="{{ url_for('index') }}">シフト管理アプリ</a></h1>
+
+        <nav class="header01-nav">
+            <ul class="header01-list">
+                <li class="header01-item"><a href="{{ url_for('form') }}">シフトを提出</a></li>
+                <li class="header01-item"><a href="{{ url_for('publish') }}">シフトを確認</a></li>
+                <li class="header01-item header01-item--contact"><a href="{{ url_for('login_admin') }}">管理者画面</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <form action="{{ url_for('publish') }}" method="POST">
+        {% for i in range(7) %}
+        <p>{{ japanese_week[i] }}のシフト</p>
+            <table border="1">
+                <tr>
+                    <th>なまえ</th>
+                    <th>入る時間</th>
+                    <th>ポジション</th>
+                </tr>
+                {% for j in week_of_staff[i] %}
+                    <tr>
+                        <td>
+                            {{ j['user'] }}
+                        </td>
+                        <td>
+                            {{ j['time'] }}
+                        </td>
+                        <td><input type="text" name="{{ j['user'] }}_{{ j['time'] }}_{{i}}" style="text-transform:uppercase;" required></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endfor %}
+        <input type="submit" value="ポジションを確定して公開">
+    </form>
+
+</body>
+</html>

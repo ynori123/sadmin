@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シフト提出フォーム</title>
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+<body>
+    <header class="header01">
+        <h1 class="header01-logo"><a href="{{ url_for('index') }}">シフト管理アプリ</a></h1>
+
+        <nav class="header01-nav">
+            <ul class="header01-list">
+                <li class="header01-item"><a href="{{ url_for('form') }}">シフトを提出</a></li>
+                <li class="header01-item"><a href="{{ url_for('publish') }}">シフトを確認</a></li>
+                <li class="header01-item header01-item--contact"><a href="{{ url_for('login_admin') }}">管理者画面</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>次週({{ start_day }})〜({{ end_day }})のシフト</h1>
+
+    <form action="{{ url_for('submit') }}" method="POST">
+        <label for="user">なまえ</label>
+        <input type="text" name="user" required><br>
+
+        <label for="mon">月曜日</label>
+        <input type="text" name="mon" id="mon" required><br>
+        
+        <label for="tue">火曜日</label>
+        <input type="text" name="tue" id="tue" required><br>
+
+        <label for="wed">水曜日</label>
+        <input type="text" name="wed" id="wed" required><br>
+
+        <label for="thu">木曜日</label>
+        <input type="text" name="thu" id="thu" required><br>
+
+        <label for="fri">金曜日</label>
+        <input type="text" name="fri" id="fri" required><br>
+        
+        <label for="sat">土曜日</label>
+        <input type="text" name="sat" id="sat" required><br>
+
+        <label for="sun">日曜日</label>
+        <input type="text" name="sun" id="sun" required><br>
+
+        <input type="submit" value="送信する">
+    </form>
+    <p>入れる日は入れる時間(例:17,11.5)を入力、入れない日はxもしくはXもしくは0を入力してください。</p>
+    <a href="{{ url_for('admin') }}">シフト提出状況を確認</a>
+</body>
+</html>

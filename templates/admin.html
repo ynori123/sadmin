@@ -19,6 +19,7 @@
             </ul>
         </nav>
     </header>
+    <button><a href="{{ url_for('check_delete')}}">シフトを募集する</a></button>
     <h1>シフト提出状況</h1>
     <a href="{{ url_for('check_delete') }}">先週のシフト提出状況を削除して新しいシフトを集める</a>
     <form action="{{ url_for('check_shift') }}" method="POST">

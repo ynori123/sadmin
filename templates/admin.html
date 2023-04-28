@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>シフト提出状況</title>
-    <link rel="stylesheet" href="../static/index.css">
+    <link rel="stylesheet" href="../static/admin.css">
 </head>
 <body>
     <header class="header01">
@@ -23,7 +23,7 @@
     <a href="{{ url_for('check_delete') }}">先週のシフト提出状況を削除して新しいシフトを集める</a>
     <form action="{{ url_for('check_shift') }}" method="POST">
         <p>入れない(削る)場合は'x'とか'X'とか'0'とか無入力にしてください</p>
-        <table border="1">
+        <table border="1" width="200">
             <tr>
                 <th>なまえ</th>
                 <th>月曜日</th>
@@ -99,7 +99,7 @@
                 </tr> 
             {%endfor %}
         </table>
-        <input type="submit" value="シフトを確定してポジションを決める">
+        <input type="submit" value="シフトを確定してポジションを決める" id="button">
         <b>※このボタンを押した瞬間先週のシフトは削除され、組み替えできなくなります。</b>
     </form>
 </body>

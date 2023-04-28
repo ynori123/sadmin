@@ -5,7 +5,6 @@ from flask_login import *
 from flask_sqlalchemy import *
 import os
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
 
 app = Flask(__name__)
 app.secret_key = 'c85ee8b6f2e44cc59358074faa51120f'

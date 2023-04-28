@@ -90,8 +90,6 @@ class Sun(db.Model):
 # INITIALIZE
 # ==============================================================
 
-# DATABASE = 'database.db'
-
 # Python interactive shell
 # >>>
 # from app import app, db

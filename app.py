@@ -1,14 +1,9 @@
 from flask import *
-import sqlite3
 import datetime
 from datetime import timedelta 
-import re
 from flask_login import *
-import hashlib
-from sqlalchemy import *
 from flask_sqlalchemy import *
 import os
-from db import create_users_table
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -200,21 +195,14 @@ def submit():
     db.session.flush()
     db.session.commit()
 
-    # sqlite3
-    # con = sqlite3.connect(DATABASE)
-    # con.execute('INSERT INTO users VALUES(?, ?, ?, ?, ?, ?, ?, ?)',
-    #             [username,mon,tue,wed,thu,fri,sat,sun])
-    # con.commit()
-    # con.close()
-
-    return redirect(url_for('index'))
+    return redirect(url_for('submit_success'))
+@app.route('/submit.success')
+def submit_success():
+    return(render_template('submit_shift.html'))
 
 @app.route('/admin')
 @login_required
 def admin():
-    # con = sqlite3.connect(DATABASE)
-    # db_users = con.execute('SELECT * FROM users').fetchall()
-    # con.close()
     db_users = db.session.query(Shifts).all()
 
     shift = []
@@ -287,9 +275,7 @@ def check_shift():
     )
 
 @app.route('/shift', methods=['POST','GET'])
-@login_required
 def publish():
-    # request.form --> ('username_time_dayofweek', 'position')  
     for data,position in request.form.items():
         username = data.split('_')[0]
         time = data.split('_')[1]
@@ -301,10 +287,6 @@ def publish():
     for dayofweek in range(7):
         shifts.append(get_shift(dayofweek))
 
-    # return render_template(
-    #     'debug.html',
-    #     debugdata=request.form.items()
-    # )
     return render_template(
         'shift.html',
         shifts=shifts,
@@ -322,11 +304,6 @@ def check_delete():
 @login_required
 def collect_shift(msg):
     if (msg == 'allow'):
-        # con = sqlite3.connect(DATABASE)
-        # con.execute('DELETE FROM users')
-        # con.commit()
-        # con.close()
-
         db.session.query(Shifts).delete()
         db.session.commit()
 
@@ -423,7 +400,6 @@ def get_shift(dayofweek):
 
 def day_of_staff(day, all):
     day_of_staff = []
-    # con = sqlite3.connect(DATABASE)
     mon_dat = []
     tue_dat = []
     wed_dat = []
@@ -460,18 +436,6 @@ def day_of_staff(day, all):
         db.session.query(Sun).delete()
         db.session.commit()
 
-
-        # con.execute('DELETE FROM mon')
-        # con.execute('DELETE FROM tue')
-        # con.execute('DELETE FROM wed')
-        # con.execute('DELETE FROM thu')
-        # con.execute('DELETE FROM fri')
-        # con.execute('DELETE FROM sat')
-        # con.execute('DELETE FROM sun')
-
-        # session.execute('INSERT INTO '+day+'(username, time) VALUES(?, ?)',
-        #         [i['user'], i[day]])
-        
         if day == 'Mon':
             dat = Mon(
                 username = i['user'],
@@ -514,8 +478,7 @@ def day_of_staff(day, all):
                 time = i[day.lower()]
             )
             sun_dat.append(dat)
-    # con.commit()
-    # con.close()
+
     shift = [mon_dat, tue_dat, wed_dat, thu_dat, fri_dat, sat_dat, sun_dat, day_of_staff]        
 
     return shift

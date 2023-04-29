@@ -57,7 +57,7 @@
 テンプレートエンジン：Jinja2 3.1.2     
 データベース：Sqlite3   
 ORM：Flask-SQLAlchemy   
-実行環境：Conoha
+実行環境：Conoha VPS
 ## プログラム構造
 プログラムの構造は以下のとおりです。
 ```tree
